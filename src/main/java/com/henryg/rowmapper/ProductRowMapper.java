@@ -1,4 +1,4 @@
-package com.henryg.dao.rowmapper;
+package com.henryg.rowmapper;
 
 import com.henryg.constant.ProductCategory;
 import com.henryg.model.Product;

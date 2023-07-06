@@ -2,7 +2,7 @@ package com.henryg.dao.impl;
 
 
 import com.henryg.dao.ProductDao;
-import com.henryg.dao.rowmapper.ProductRowMapper;
+import com.henryg.rowmapper.ProductRowMapper;
 import com.henryg.dto.ProductRequest;
 import com.henryg.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.DataBinder;
-import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -52,7 +50,8 @@ public class ProductDaoImpl implements ProductDao {
         map.put("productName", productRequest.getProductName());
         map.put("category",productRequest.getCategory());
         map.put("imageUrl", productRequest.getImageUrl());
-        map.put("stock",productRequest.getPrice());
+        map.put("price", productRequest.getPrice());
+        map.put("stock",productRequest.getStock());
         map.put("description",productRequest.getDescription());
 
         Date now = new Date();
@@ -66,6 +65,28 @@ public class ProductDaoImpl implements ProductDao {
         int productId = keyHolder.getKey().intValue();
 
         return productId;
+
+    }
+
+    @Override
+    public void updateProduct(Integer productId, ProductRequest productRequest) {
+        String sql = "UPDATE product SET product_name = :product_name, category = :category, image_url = :imageUrl,"+
+                "price = :price, stock = :stock, description = :description, last_modified_date = :lastModifiedDate" +
+                "WHERE product_id = :productId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId",productId);
+
+        map.put("productName", productRequest.getProductName());
+        map.put("category",productRequest.getCategory());
+        map.put("imageUrl", productRequest.getImageUrl());
+        map.put("price", productRequest.getPrice());
+        map.put("stock",productRequest.getStock());
+        map.put("description",productRequest.getDescription());
+
+        map.put("lastModifiedDate", new Date());
+
+        namedParameterJdbcTemplate.update(sql, map);
 
 
     }
