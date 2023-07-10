@@ -2,6 +2,7 @@ package com.henryg.contorller;
 
 import com.henryg.constant.ProductCategory;
 import com.henryg.dao.ProductDao;
+import com.henryg.dto.ProductQueryParams;
 import com.henryg.dto.ProductRequest;
 import com.henryg.model.Product;
 import com.henryg.service.ProductService;
@@ -24,7 +25,11 @@ public class ProductController {
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
     ){
-       List<Product> productList = productService.getProducts(category,search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+
+       List<Product> productList = productService.getProducts(productQueryParams);
 
        return ResponseEntity.status(HttpStatus.OK).body(productList);
 
