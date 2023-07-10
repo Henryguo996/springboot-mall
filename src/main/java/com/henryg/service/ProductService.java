@@ -1,5 +1,6 @@
 package com.henryg.service;
 
+import com.henryg.constant.ProductCategory;
 import com.henryg.dto.ProductRequest;
 import com.henryg.model.Product;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProducts();
+    List<Product> getProducts(ProductCategory category,String search);
 
 
     Product getProductById(Integer productId);
