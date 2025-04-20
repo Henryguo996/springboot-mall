@@ -1,8 +1,11 @@
 package com.guohenry.springbootmall.dao;
 
+import com.guohenry.springbootmall.dto.ProductRequest;
 import com.guohenry.springbootmall.model.Product;
 
 public interface ProductDao {
 
     Product getProductById(Integer productId);
+
+    Integer createProduct(ProductRequest prodcutRequest);
 }
