@@ -5,6 +5,8 @@ import com.guohenry.springbootmall.model.Product;
 
 public interface ProductDao {
 
+    List<Product> getProducts();
+
     Product getProductById(Integer productId);
 
     Integer createProduct(ProductRequest prodcutRequest);
