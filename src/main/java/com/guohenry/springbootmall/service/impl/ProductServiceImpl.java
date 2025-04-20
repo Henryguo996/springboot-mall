@@ -1,7 +1,8 @@
 package com.guohenry.springbootmall.service.impl;
 
-import com.guohenry.springbootmall.constant.ProductCategory;
+
 import com.guohenry.springbootmall.dao.ProductDao;
+import com.guohenry.springbootmall.dto.ProductQueryParams;
 import com.guohenry.springbootmall.dto.ProductRequest;
 import com.guohenry.springbootmall.model.Product;
 import com.guohenry.springbootmall.service.ProductService;
@@ -17,9 +18,9 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts(ProductCategory category,String search) {
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
 
-        return productDao.getProducts(category,search);
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override
