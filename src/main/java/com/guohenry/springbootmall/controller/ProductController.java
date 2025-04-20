@@ -1,5 +1,6 @@
 package com.guohenry.springbootmall.controller;
 
+import com.guohenry.springbootmall.constant.ProductCategory;
 import com.guohenry.springbootmall.dto.ProductRequest;
 import com.guohenry.springbootmall.model.Product;
 import com.guohenry.springbootmall.service.ProductService;
@@ -17,8 +18,9 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(){
-        List<Product> productList = ProductService.getProducts();
+    public ResponseEntity<List<Product>> getProducts(@RequestParam(required=false) ProductCategory category,
+                                                     @RequestParam(required = false) String search){
+        List<Product> productList = productService.getProducts(category, search);
 
            return ResponseEntity.status(HttpStatus.OK).body(productList);
     }
